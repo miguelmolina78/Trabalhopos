@@ -1,4 +1,4 @@
-package br.com.facef.aula32.contoller;
+package br.com.facef.aula32.controller;
 
 import br.com.facef.aula32.business.EmpresaBusiness;
 import br.com.facef.aula32.model.Empresa;
