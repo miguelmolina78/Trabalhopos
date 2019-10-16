@@ -13,7 +13,7 @@ public class Empresa implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column
     private int id;
-
+    /* teste */
     @Column (name = "nome", length = 50)
     private String nome;
 
