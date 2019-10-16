@@ -17,6 +17,7 @@ public class Empresa implements Serializable {
     @Column (name = "nome", length = 50)
     private String nome;
 
+    /*Comentário para commit*/
     public Empresa() {
     }
 
