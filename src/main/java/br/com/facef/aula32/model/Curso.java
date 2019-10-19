@@ -22,8 +22,10 @@ public class Curso implements Serializable {
     private Double valorMensalidade;
 
     @Column (name = "dataExpirou")
-    @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date dataExpirou;
+
+    @OneToOne(mappedBy = "curso")
+    private Turma turma;
 
     public Curso() {
     }
@@ -65,4 +67,11 @@ public class Curso implements Serializable {
         this.dataExpirou = dataExpirou;
     }
 
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
 }
