@@ -48,7 +48,6 @@ public class CursoController {
         if (cursoAtualiza.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
-            System.out.println(curso.getDataExpirou());
 
             Curso cursoGravar = cursoAtualiza.get();
             cursoGravar.setNome(curso.getNome());

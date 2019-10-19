@@ -1,10 +1,12 @@
 package br.com.facef.aula32.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="turma")
@@ -33,6 +35,18 @@ public class Turma implements Serializable {
 
     @Column (name = "dataFinalAulas")
     private Date dataFinalAulas;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "turma")
+    private Set<Aluno> aluno;
+
+    public Set<Aluno> getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Set<Aluno> aluno) {
+        this.aluno = aluno;
+    }
 
     public int getId() {
         return id;
