@@ -1,10 +1,12 @@
 package br.com.facef.aula32.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="curso")
@@ -24,8 +26,9 @@ public class Curso implements Serializable {
     @Column (name = "dataExpirou")
     private Date dataExpirou;
 
-    @OneToOne(mappedBy = "curso")
-    private Turma turma;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "curso")
+    private Set<Turma> turma;
 
     public Curso() {
     }
@@ -67,11 +70,11 @@ public class Curso implements Serializable {
         this.dataExpirou = dataExpirou;
     }
 
-    public Turma getTurma() {
+    public Set<Turma> getTurma() {
         return turma;
     }
 
-    public void setTurma(Turma turma) {
+    public void setTurma(Set<Turma> turma) {
         this.turma = turma;
     }
 }

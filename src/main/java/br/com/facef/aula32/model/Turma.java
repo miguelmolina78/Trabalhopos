@@ -1,5 +1,7 @@
 package br.com.facef.aula32.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,8 +17,9 @@ public class Turma implements Serializable {
     @Column
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "curso_id", referencedColumnName = "id")
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "curso_id", nullable=false)
     private Curso curso;
 
     @Column (name = "dataInicioInscricao")
@@ -75,9 +78,7 @@ public class Turma implements Serializable {
         return curso;
     }
 
-
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-
 }

@@ -16,14 +16,18 @@ import java.util.Optional;
 public class TurmaBusinessImpl implements TurmaBusiness {
 
     private final TurmaRepository turmaRepository;
-    private final CursoRepository cursoRepository;
+//    private final CursoRepository cursoRepository;
 
     @Autowired
+    public TurmaBusinessImpl(TurmaRepository turmaRepository) {
+        this.turmaRepository = turmaRepository;
+    }
+/*
     public TurmaBusinessImpl(TurmaRepository turmaRepository, CursoRepository cursoRepository) {
         this.turmaRepository = turmaRepository;
         this.cursoRepository = cursoRepository;
     }
-
+*/
     @Override
     public List<Turma> findAll() {
         return  turmaRepository.findAll();
@@ -31,8 +35,10 @@ public class TurmaBusinessImpl implements TurmaBusiness {
     }
 
     public Turma save(Turma t) {
-        t.setCurso(cursoRepository.findById(t.getCurso().getId())
+/*        t.setCurso(cursoRepository.findById(t.getCurso().getId())
                 .get());
+
+ */
         return turmaRepository.save(t);
     }
 
