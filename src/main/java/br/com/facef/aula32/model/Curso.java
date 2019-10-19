@@ -30,6 +30,11 @@ public class Curso implements Serializable {
     @OneToMany(mappedBy = "curso")
     private Set<Turma> turma;
 
+    @JsonManagedReference(value="curso")
+    @OneToMany(mappedBy = "curso")
+    private Set<Materia> materia;
+
+
     public Curso() {
     }
 

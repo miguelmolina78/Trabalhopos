@@ -1,7 +1,10 @@
 package br.com.facef.aula32.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name="professor")
@@ -11,13 +14,24 @@ public class Professor implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
     /* teste */
     @Column (name = "nome", length = 50)
     private String nome;
     private float salario;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "professor")
+    private Set<Materia> materia;
+
+
+    public Set<Materia> getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Set<Materia> materia) {
+        this.materia = materia;
+    }
 
     /*Comentário para commit*/
     public Professor() {
