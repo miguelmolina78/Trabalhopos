@@ -2,6 +2,8 @@ package br.com.facef.aula32.controller;
 
 import br.com.facef.aula32.business.AlunoBusiness;
 import br.com.facef.aula32.model.Aluno;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +18,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/alunos")
+
+@Api(value = "/v1/alunos")
+
+
 public class AlunoController {
 
     private AlunoBusiness alunoBusiness;
@@ -25,8 +31,13 @@ public class AlunoController {
         this.alunoBusiness = alunoBusiness;
     }
 
+
     @GetMapping
-    public ResponseEntity<List<Aluno>> findAll(){
+    @ApiOperation(value = "Lista todos os alunos",
+            notes = "Lista",
+            response = Aluno.class,
+            responseContainer = "List")
+    public ResponseEntity<List<Aluno>> findAll() {
         return ResponseEntity.ok().body(alunoBusiness.findAll());
     }
 
@@ -37,7 +48,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<Aluno> post(@RequestBody Aluno aluno){
+    public ResponseEntity<Aluno> post(@RequestBody Aluno aluno) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoBusiness.save(aluno));
     }
 
@@ -45,7 +56,7 @@ public class AlunoController {
     public ResponseEntity<Aluno> atualizaAluno(@RequestBody Aluno aluno, @PathVariable int id) {
 
         Optional<Aluno> alunoAtualiza = alunoBusiness.findById(id);
-        if (alunoAtualiza.isEmpty()) {
+        if (alunoAtualiza.isPresent() == false) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
 
@@ -58,19 +69,18 @@ public class AlunoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int id){
+    public void deleteById(@PathVariable int id) {
         alunoBusiness.deleteById(id);
     }
 
     @GetMapping("/paginado")
-    public List<Aluno> getAllEmployees(@RequestParam(defaultValue = "0", required = false) Integer numeroPagina)
-    {
+    public List<Aluno> getAllEmployees(@RequestParam(defaultValue = "0", required = false) Integer numeroPagina) {
 //        Pageable paging = PageRequest.of(1, 10, Sort.by("nome").descending());
-      // @RequestParam(defaultValue = "0") Integer pageNo
-        Pageable paging = PageRequest.of (numeroPagina, 10);//, Sort.by("nome").descending());
+        // @RequestParam(defaultValue = "0") Integer pageNo
+        Pageable paging = PageRequest.of(numeroPagina, 10);//, Sort.by("nome").descending());
         Page<Aluno> pagedResult = alunoBusiness.listapaginada(paging);
 
-        if(pagedResult.hasContent()) {
+        if (pagedResult.hasContent()) {
             return pagedResult.getContent();
         } else {
             return new ArrayList<Aluno>();

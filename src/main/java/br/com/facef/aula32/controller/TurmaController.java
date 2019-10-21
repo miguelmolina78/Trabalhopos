@@ -45,7 +45,7 @@ public class TurmaController {
     public ResponseEntity<Turma> atualizaCurso(@RequestBody Turma turma, @PathVariable int id) {
 
         Optional<Turma> turmaAtualiza = turmaBusiness.findById(id);
-        if (turmaAtualiza.isEmpty()) {
+        if (turmaAtualiza.isPresent() == false ) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
 

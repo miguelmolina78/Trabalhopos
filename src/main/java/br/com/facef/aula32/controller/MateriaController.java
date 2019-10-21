@@ -51,7 +51,7 @@ public class MateriaController {
     public ResponseEntity<Materia> atualizaMateria(@RequestBody Materia materia, @PathVariable int id) {
 
         Optional<Materia> materiaAtualiza = materiaBusiness.findById(id);
-        if (materiaAtualiza.isEmpty()) {
+        if (materiaAtualiza.isPresent() == false ) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
             Materia materiaGravar = materiaAtualiza.get();

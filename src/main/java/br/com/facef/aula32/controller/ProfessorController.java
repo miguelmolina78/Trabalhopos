@@ -46,7 +46,7 @@ public class ProfessorController {
     public ResponseEntity<Professor> atualizaProfessor(@RequestBody Professor professor, @PathVariable int id) {
 
         Optional<Professor> professorAtualiza = professorBusiness.findById(id);
-        if (professorAtualiza.isEmpty()) {
+        if (professorAtualiza.isPresent() == false ) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
             Professor professorGravar = professorAtualiza.get();

@@ -45,7 +45,7 @@ public class CursoController {
     public ResponseEntity<Curso> atualizaCurso(@RequestBody Curso curso, @PathVariable int id) {
 
         Optional<Curso> cursoAtualiza = cursoBusiness.findById(id);
-        if (cursoAtualiza.isEmpty()) {
+        if (cursoAtualiza.isPresent() == false ) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
 
