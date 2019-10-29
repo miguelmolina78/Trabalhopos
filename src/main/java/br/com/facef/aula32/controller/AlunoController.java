@@ -118,4 +118,26 @@ public class AlunoController {
         }
     }
 
+    @ApiOperation(value="Listar os alunos por nome (Início do nome).",response=Aluno.class,
+            notes="Essa operação retorna lista de alunos por nome. " +
+                  "Nesse EndPoint o nome a ser pesquisado é passado por /nome" )
+    @ApiResponses(value= {
+            @ApiResponse(code=200, message="Retorna lista de Alunos por nome (Início do nome).", response=Aluno.class)})
+    @GetMapping("/alunoPorNome/{nome}")
+    public ResponseEntity<List<Aluno>> findByNome(@PathVariable String nome) {
+
+        return ResponseEntity.ok().body(alunoBusiness.findAllByNomeStartingWith(nome));
+    }
+
+    @ApiOperation(value="Listar os alunos por nome (Início do nome).",response=Aluno.class,
+            notes="Essa operação retorna lista de alunos por nome. " +
+                    "Nesse EndPoint o nome a ser pesquisado é passado por ?nome=" )
+    @ApiResponses(value= {
+            @ApiResponse(code=200, message="Retorna lista de Alunos por nome (Início do nome).", response=Aluno.class)})
+    @GetMapping("/alunoPorNomeParametro")
+    public ResponseEntity<List<Aluno>> findByNome2(@RequestParam(required = true) String nome) {
+
+        return ResponseEntity.ok().body(alunoBusiness.findAllByNomeStartingWith(nome));
+    }
+
 }
