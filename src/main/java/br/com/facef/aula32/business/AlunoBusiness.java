@@ -14,6 +14,7 @@ public interface AlunoBusiness {
     Aluno save(Aluno a);
     void deleteById(int id);
     Page<Aluno> listapaginada(Pageable pageable);
+    List<Aluno> findAllByNomeStartingWith(String nome);
 
 }
 

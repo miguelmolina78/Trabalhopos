@@ -45,4 +45,9 @@ public class AlunoBusinessImpl implements AlunoBusiness {
 
     }
 
+    public List<Aluno> findAllByNomeStartingWith(String nome) {
+        return  alunoRepository.findAllByNomeStartingWith(nome);
+    }
+
+
 }
