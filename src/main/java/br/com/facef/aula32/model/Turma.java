@@ -1,7 +1,6 @@
 package br.com.facef.aula32.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="turma")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Turma implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,11 +18,6 @@ public class Turma implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column
     private int id;
-
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "curso_id", nullable=false)
-    private Curso curso;
 
     @Column (name = "dataInicioInscricao")
     private Date dataInicioInscricao;
@@ -36,8 +31,15 @@ public class Turma implements Serializable {
     @Column (name = "dataFinalAulas")
     private Date dataFinalAulas;
 
-    @JsonManagedReference
+    //@JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "curso_id", nullable=false)
+    private Curso curso;
+
+    //@JsonManagedReference
     @OneToMany(mappedBy = "turma")
+    @OrderBy("nome ASC")
+    @JsonIgnore
     private Set<Aluno> aluno;
 
     public Set<Aluno> getAluno() {

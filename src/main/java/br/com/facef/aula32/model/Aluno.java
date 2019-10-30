@@ -1,7 +1,9 @@
 package br.com.facef.aula32.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="aluno")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Aluno implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,9 +27,9 @@ public class Aluno implements Serializable {
     @Column (name = "dataNascimento")
     private Date dataNascimento;
 
-    @JsonBackReference
+    //@JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "turma_id", nullable=false)
+    @JoinColumn(name = "turma_id", nullable=true)
     private Turma turma;
 
     public Turma getTurma() {

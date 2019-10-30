@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1/materia")
+@RequestMapping("/v1/materias")
 public class MateriaController {
 
     private MateriaBusiness materiaBusiness;

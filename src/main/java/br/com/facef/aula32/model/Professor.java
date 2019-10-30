@@ -1,6 +1,9 @@
 package br.com.facef.aula32.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="professor")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Professor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,8 +24,9 @@ public class Professor implements Serializable {
     private String nome;
     private float salario;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @OneToMany(mappedBy = "professor")
+    @JsonIgnore
     private Set<Materia> materia;
 
 

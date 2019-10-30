@@ -1,6 +1,9 @@
 package br.com.facef.aula32.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="curso")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Curso implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,12 +30,14 @@ public class Curso implements Serializable {
     @Column (name = "dataExpirou")
     private Date dataExpirou;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @OneToMany(mappedBy = "curso")
+    @JsonIgnore
     private Set<Turma> turma;
 
-    @JsonManagedReference(value="curso")
+    //@JsonManagedReference(value="curso")
     @OneToMany(mappedBy = "curso")
+    @JsonIgnore
     private Set<Materia> materia;
 
 
