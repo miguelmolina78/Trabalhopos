@@ -150,7 +150,8 @@ public class AlunoController {
             @ApiResponse(code=500, message="Erro interno do servidor.", response=Aluno.class),
             @ApiResponse(code=400, message="Problemas com a Requisição.", response=Aluno.class)})
     @GetMapping("/alunoPorNome/{nome}")
-    public ResponseEntity<List<Aluno>> findByNome(@PathVariable String nome) {
+    public ResponseEntity<List<Aluno>> findByNome(@ApiParam(name="nome",value = "Parte inicial do nome do aluno.")
+                                                  @PathVariable String nome) {
 
         return ResponseEntity.ok().body(alunoBusiness.findAllByNomeStartingWith(nome));
     }
