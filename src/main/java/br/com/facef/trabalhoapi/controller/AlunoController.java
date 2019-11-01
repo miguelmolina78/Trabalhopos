@@ -105,6 +105,7 @@ public class AlunoController {
         }
 
     }
+
     @ApiOperation(value="Exclusão de um aluno na base de dados.",response=Aluno.class,
             notes="Essa operação exclui PERMANENTEMENTE informações do aluno na base de dados.")
     @ApiResponses(value= {
